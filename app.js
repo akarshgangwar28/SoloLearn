@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
-
+const Courses=require('../models/courses')
 const app = express();
 
 app.use(express.static("public"));
@@ -21,8 +21,14 @@ app.get("/courseUpload",(req ,res)=>{
 })
 
 app.get("/:id/courseView",(req,res)=>{
-    res.render("courseView")
+    var gotId=await Courses.findOne({_id:id})
+    console.log(gotId)
+    res.render("courseView",{id:gotId})
 
+})
+
+app.get("/beInstructor", (req,res)=>{
+    
 })
 
 app.get("/",(req,res)=>{
