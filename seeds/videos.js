@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { fName, lName } = require('./seedsHelper');
+const { fName, lName } = require('./helper/nameRandom');
 const Videos = require('../models/videos')
 
 mongoose.connect('mongodb://localhost:27017/solo-learn', {
@@ -19,11 +19,11 @@ const seedVideos = async () => {
     for (let i = 0; i < 50; i++) {
         const randomf = Math.floor(Math.random() * fName.length);
         const randoml = Math.floor(Math.random() * lName.length);
-        const videos = new Videos({
+        const video = new Videos({
             title: `${fName[randomf]} ${lName[randoml]}`,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil rem quasi neque sapiente, hic at facilis illum non, quae quam reprehenderit consectetur aliquid officiis quas architecto numquam dignissimos. Nostrum, delectus.',
         })
-        await videos.save();
+        await video.save();
     }
 }
 
